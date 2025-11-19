@@ -142,6 +142,15 @@ body {
     padding: 0 35px 35px 35px;
 }
 
+/* --- TAB LOGIC --- */
+.view-section { display: none; animation: fadeIn 0.4s ease; }
+.view-section.active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* Cards Common */
 .card {
     background: rgba(39, 41, 61, 0.8); /* Slight opacity on cards */
@@ -247,3 +256,53 @@ body {
 .log-time { color: #ba54f5; margin-right: 10px; font-weight: bold; }
 .log-action { color: #1d8cf8; font-weight: bold; }
 .log-msg { color: #fff; }
+
+/* --- PROCESS TABLE STYLE --- */
+.table-card { padding: 0; overflow: hidden; height: 600px; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; }
+.table-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: -ms-flexbox; display: flex;
+    -ms-flex-pack: justify; justify-content: space-between;
+    -ms-flex-align: center; align-items: center;
+}
+.table-header h3 { margin: 0; }
+.btn-refresh {
+    background: #3358f4; border: none; color: white;
+    padding: 8px 15px; border-radius: 5px; cursor: pointer;
+    font-size: 12px;
+}
+.btn-refresh:hover { background: #1d8cf8; }
+
+.table-container { -ms-flex: 1; flex: 1; overflow-y: auto; }
+
+.hyper-table {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+}
+.hyper-table th {
+    background: rgba(0,0,0,0.2);
+    color: #aaa;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    position: relative; /* Sticky simulation handled by structure, simplified for HTA */
+}
+.hyper-table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.02);
+    color: #e0e0e0;
+}
+.hyper-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.hyper-table tr:hover { background: rgba(225, 78, 202, 0.1); }
+
+.btn-kill {
+    background: transparent;
+    border: 1px solid #fd5d93;
+    color: #fd5d93;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+.btn-kill:hover { background: #fd5d93; color: white; box-shadow: 0 0 8px rgba(253, 93, 147, 0.6); }

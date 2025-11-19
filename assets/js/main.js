@@ -50,12 +50,48 @@ function initApp() {
                 var voice = new ActiveXObject("SAPI.SpVoice");
                 voice.Rate = 1; // Speed
                 voice.Volume = 100;
-                voice.Speak("Welcome back, Administrator.");
+                voice.Speak("Hyper Admin Ready.");
             } catch(e) { /* Ignore if no voice installed */ }
-        }, 1000);
+        }, 500);
         
     } catch (e) {
         alert("Lỗi khởi tạo: " + e.message);
+    }
+}
+
+// --- TAB NAVIGATION ---
+function switchTab(tabId) {
+    // 1. Update Nav State
+    var navs = ["dashboard", "processes", "specs"];
+    for(var i=0; i<navs.length; i++) {
+        var navEl = document.getElementById("nav-" + (navs[i] == "dashboard" ? "dash" : (navs[i] == "processes" ? "proc" : "specs")));
+        if(navEl) navEl.className = "nav-item"; // reset
+        
+        var viewEl = document.getElementById("view-" + navs[i]);
+        if(viewEl) viewEl.className = "view-section"; // hide
+    }
+
+    // 2. Activate selected
+    var activeNav = document.getElementById("nav-" + (tabId == "dashboard" ? "dash" : (tabId == "processes" ? "proc" : "specs")));
+    if(activeNav) activeNav.className = "nav-item active";
+
+    var activeView = document.getElementById("view-" + tabId);
+    if(activeView) activeView.className = "view-section active";
+
+    // 3. Update Title
+    var titles = {
+        "dashboard": "System Overview",
+        "processes": "Task Manager Pro",
+        "specs": "Hardware Analysis"
+    };
+    document.getElementById("page-title").innerText = titles[tabId] || "Hyper Admin";
+
+    // 4. Trigger data load if needed
+    if(tabId === "processes") {
+        setTimeout(loadProcessList, 100); // slight delay for transition
+    }
+    if(tabId === "specs") {
+        setTimeout(getDeepSpecs, 100);
     }
 }
 
