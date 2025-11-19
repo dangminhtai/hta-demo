@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<!-- 
+    PROJECT: HYPER HTA - ADMIN DASHBOARD
+    DESIGN: MODERN FLAT UI
+-->
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>HYPER CONTROL CENTER</title>
+
+    <HTA:APPLICATION 
+        ID="oHyperHTA"
+        APPLICATIONNAME="HyperAdmin"
+        BORDER="thin"
+        BORDERSTYLE="normal"
+        CAPTION="yes"
+        SHOWINTASKBAR="yes"
+        SINGLEINSTANCE="yes"
+        SYSMENU="yes"
+        SCROLL="no"
+        WINDOWSTATE="normal"
+        ICON="control.exe"
+        NAVIGABLE="yes"
+        INNERBORDER="no"
+    />
+
+    <!-- ASSETS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body onload="initApp()">
+    
+    <!-- DYNAMIC BACKGROUND -->
+    <canvas id="canvas-bg"></canvas>
+
+    <div class="app-container">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">H</div>
+                <div class="brand-text">HYPER<span>ADMIN</span></div>
+            </div>
+
+            <div class="user-profile">
+                <div class="avatar-circle" id="user-avatar">AD</div>
+                <div class="user-info">
+                    <div id="lbl-user" class="user-name">Loading...</div>
+                    <div class="user-role">Root Administrator</div>
+                </div>
+            </div>
+
+            <!-- Simplified Nav -->
+            <nav class="nav-menu">
+                <div class="nav-item active">
+                    <span class="icon">💠</span> Dashboard
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                SYSTEM: <span id="lbl-pc">...</span><br>
+                STATUS: <span style="color:#00f2c3">ONLINE</span>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="main-content">
+            
+            <!-- HEADER -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1>System Overview</h1>
+                    <p>Administrative Control Panel</p>
+                </div>
+                <div class="header-time" id="clock-display">00:00:00</div>
+            </header>
+
+            <!-- CONTENT GRID -->
+            <div class="content-scroll">
+                
+                <!-- STATUS CARDS -->
+                <div class="stats-row">
+                    <div class="card stat-card">
+                        <div class="stat-icon blue">💻</div>
+                        <div class="stat-details">
+                            <h3>CPU Load</h3>
+                            <h2 id="lbl-cpu-real">Scanning...</h2>
+                            <div class="progress-bg"><div id="meter-cpu" class="progress-bar blue" style="width: 0%"></div></div>
+                            <span id="val-cpu" class="stat-sub">0% Load</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card stat-card">
+                        <div class="stat-icon purple">🧠</div>
+                        <div class="stat-details">
+                            <h3>Memory Info</h3>
+                            <h2 id="lbl-ram-real">Scanning...</h2>
+                            <div class="progress-bg"><div id="meter-ram" class="progress-bar purple" style="width: 0%"></div></div>
+                            <span id="val-ram" class="stat-sub">0% Used</span>
+                        </div>
+                    </div>
+
+                    <div class="card stat-card">
+                        <div class="stat-icon orange">🛡️</div>
+                        <div class="stat-details">
+                            <h3>Environment</h3>
+                            <h2 id="lbl-os-real">Windows</h2>
+                            <span id="lbl-ver-real" class="stat-sub">Checking build...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TOOLS SECTION -->
+                <div class="section-title">System Utilities</div>
+                
+                <div class="tools-grid">
+                    <!-- Basic Tools -->
+                    <div class="card tool-card" onclick="runCmd('taskmgr', 'Task Manager')">
+                        <div class="tool-icon">⚡</div>
+                        <div class="tool-name">Task Manager</div>
+                    </div>
+
+                    <div class="card tool-card" onclick="runCmd('cmd.exe', 'Terminal')">
+                        <div class="tool-icon">💻</div>
+                        <div class="tool-name">Terminal</div>
+                    </div>
+
+                    <div class="card tool-card action-clean" onclick="cleanJunk()">
+                        <div class="tool-icon">🧹</div>
+                        <div class="tool-name">Clean Temp</div>
+                    </div>
+
+                    <!-- Admin Tools (Moved here) -->
+                    <div class="card tool-card" onclick="openDbFolder()">
+                        <div class="tool-icon">📂</div>
+                        <div class="tool-name">Data Logs</div>
+                    </div>
+
+                    <div class="card tool-card" onclick="runCmd('control', 'Control Panel')">
+                        <div class="tool-icon">⚙️</div>
+                        <div class="tool-name">Settings</div>
+                    </div>
+
+                    <div class="card tool-card action-ping" onclick="pingTest()">
+                        <div class="tool-icon">📡</div>
+                        <div class="tool-name">Check Net</div>
+                    </div>
+                </div>
+
+                <!-- ADVANCED FEATURES -->
+                <div class="section-title">Advanced Privileges</div>
+                <div class="tools-grid">
+                    
+                    <div class="card tool-card" onclick="openGodMode()">
+                        <div class="tool-icon" style="background: linear-gradient(135deg, #ff4b1f, #ff9068); color: white;">👑</div>
+                        <div class="tool-name">God Mode</div>
+                    </div>
+
+                    <div class="card tool-card" onclick="toggleHiddenFiles()">
+                        <div class="tool-icon" style="background: linear-gradient(135deg, #11998e, #38ef7d); color: white;">👁️</div>
+                        <div class="tool-name">Show Hidden</div>
+                    </div>
+
+                    <div class="card tool-card" onclick="systemSpeak()">
+                        <div class="tool-icon" style="background: linear-gradient(135deg, #8E2DE2, #4A00E0); color: white;">🤖</div>
+                        <div class="tool-name">Voice Report</div>
+                    </div>
+
+                </div>
+
+                <!-- LOGS SECTION -->
+                <div class="section-title">Live Operations</div>
+                <div class="card log-card">
+                    <div id="console-wrapper">
+                        <!-- Logs injected here -->
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/main.js"></script>
+    <script src="modules/db/database.js"></script>
+    <script src="modules/system/hardware.js"></script>
+    <script src="modules/tools/commands.js"></script>
+
+</body>
+</html>
