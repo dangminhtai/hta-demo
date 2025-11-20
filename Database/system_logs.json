@@ -1,128 +1,23 @@
 ﻿[
   {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎13‎:‎59‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "SYSTEM",
-    "details": "Opened Database Folder"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎14‎:‎02‎ ‎AM",
+    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎2‎:‎35‎:‎48‎ ‎PM",
     "user": "minh tai",
     "host": "TAMIDA142857",
     "action": "EXECUTE",
-    "details": "Launched tool: Settings"
+    "details": "Launched: Control Panel"
   },
   {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎22‎:‎15‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "SYSTEM",
-    "details": "Opened Database Folder"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎22‎:‎30‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "SYSTEM",
-    "details": "Opened Database Folder"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎22‎:‎33‎ ‎AM",
+    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎2‎:‎35‎:‎55‎ ‎PM",
     "user": "minh tai",
     "host": "TAMIDA142857",
     "action": "EXECUTE",
-    "details": "Launched tool: Settings"
+    "details": "Launched: Task Manager"
   },
   {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎22‎:‎42‎ ‎AM",
+    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎2‎:‎59‎:‎25‎ ‎PM",
     "user": "minh tai",
     "host": "TAMIDA142857",
     "action": "EXECUTE",
-    "details": "Launched tool: Task Manager"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎22‎:‎46‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "EXECUTE",
-    "details": "Launched tool: Calculator"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎22‎:‎48‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "EXECUTE",
-    "details": "Launched tool: Notepad"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎22‎:‎56‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "EXECUTE",
-    "details": "Launched tool: Notepad"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎30‎:‎17‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "EXECUTE",
-    "details": "Launched tool: Task Manager"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎30‎:‎21‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "EXECUTE",
-    "details": "Launched tool: Terminal"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎30‎:‎26‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "NETWORK",
-    "details": "Ping 8.8.8.8: PASS"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎30‎:‎28‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "EXECUTE",
-    "details": "Launched tool: Control Panel"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎30‎:‎30‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "SYSTEM",
-    "details": "Opened Database Folder"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎30‎:‎54‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "TWEAK",
-    "details": "Changed Hidden Files to HIDDEN"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎31‎:‎09‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "TWEAK",
-    "details": "Changed Hidden Files to VISIBLE"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎31‎:‎39‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "ADMIN",
-    "details": "User accessed God Mode"
-  },
-  {
-    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎1‎:‎32‎:‎42‎ ‎AM",
-    "user": "minh tai",
-    "host": "TAMIDA142857",
-    "action": "EXECUTE",
-    "details": "Launched tool: Terminal"
+    "details": "Launched: Task Manager"
   }
 ]

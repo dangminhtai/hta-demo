@@ -3,6 +3,7 @@
 <!-- 
     PROJECT: HYPER HTA - ADMIN DASHBOARD
     DESIGN: MODERN FLAT UI
+    STRUCTURE: MODULAR V2
 -->
 <html lang="vi">
 <head>
@@ -26,8 +27,10 @@
         INNERBORDER="no"
     />
 
-    <!-- ASSETS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- STYLES (Split for better maintenance) -->
+    <link rel="stylesheet" href="assets/css/core.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
 </head>
 <body onload="initApp()">
     
@@ -48,6 +51,7 @@
                 <div class="user-info">
                     <div id="lbl-user" class="user-name">Loading...</div>
                     <div class="user-role">Root Administrator</div>
+                    <div id="lbl-uptime" class="user-role" style="color:#00f2c3; margin-top:4px;">Up: ...</div>
                 </div>
             </div>
 
@@ -56,11 +60,20 @@
                 <div class="nav-item active" id="nav-dash" onclick="switchTab('dashboard')">
                     <span class="icon">💠</span> Dashboard
                 </div>
+                <div class="nav-item" id="nav-term" onclick="switchTab('terminal')">
+                    <span class="icon">💻</span> Terminal
+                </div>
+                <div class="nav-item" id="nav-net" onclick="switchTab('network')">
+                    <span class="icon">📡</span> Network Info
+                </div>
                 <div class="nav-item" id="nav-proc" onclick="switchTab('processes')">
                     <span class="icon">⚡</span> Task Killer
                 </div>
                 <div class="nav-item" id="nav-specs" onclick="switchTab('specs')">
                     <span class="icon">💾</span> Hardware Core
+                </div>
+                <div class="nav-item" id="nav-power" onclick="switchTab('power')">
+                    <span class="icon">🛠️</span> Power Tools
                 </div>
             </nav>
 
@@ -123,58 +136,18 @@
                     <div class="section-title">System Utilities</div>
                     
                     <div class="tools-grid">
-                        <!-- Basic Tools -->
                         <div class="card tool-card" onclick="runCmd('taskmgr', 'Task Manager')">
                             <div class="tool-icon">⚡</div>
                             <div class="tool-name">Task Manager</div>
                         </div>
-
-                        <div class="card tool-card" onclick="runCmd('cmd.exe', 'Terminal')">
-                            <div class="tool-icon">💻</div>
-                            <div class="tool-name">Terminal</div>
-                        </div>
-
                         <div class="card tool-card action-clean" onclick="cleanJunk()">
                             <div class="tool-icon">🧹</div>
                             <div class="tool-name">Clean Temp</div>
                         </div>
-
-                        <!-- Admin Tools -->
-                        <div class="card tool-card" onclick="openDbFolder()">
-                            <div class="tool-icon">📂</div>
-                            <div class="tool-name">Data Logs</div>
-                        </div>
-
                         <div class="card tool-card" onclick="runCmd('control', 'Control Panel')">
                             <div class="tool-icon">⚙️</div>
                             <div class="tool-name">Settings</div>
                         </div>
-
-                        <div class="card tool-card action-ping" onclick="pingTest()">
-                            <div class="tool-icon">📡</div>
-                            <div class="tool-name">Check Net</div>
-                        </div>
-                    </div>
-
-                    <!-- ADVANCED FEATURES -->
-                    <div class="section-title">Advanced Privileges</div>
-                    <div class="tools-grid">
-                        
-                        <div class="card tool-card" onclick="openGodMode()">
-                            <div class="tool-icon" style="background: linear-gradient(135deg, #ff4b1f, #ff9068); color: white;">👑</div>
-                            <div class="tool-name">God Mode</div>
-                        </div>
-
-                        <div class="card tool-card" onclick="toggleHiddenFiles()">
-                            <div class="tool-icon" style="background: linear-gradient(135deg, #11998e, #38ef7d); color: white;">👁️</div>
-                            <div class="tool-name">Show Hidden</div>
-                        </div>
-
-                        <div class="card tool-card" onclick="systemSpeak()">
-                            <div class="tool-icon" style="background: linear-gradient(135deg, #8E2DE2, #4A00E0); color: white;">🤖</div>
-                            <div class="tool-name">Voice Report</div>
-                        </div>
-
                     </div>
 
                     <!-- LOGS SECTION -->
@@ -186,7 +159,45 @@
                     </div>
                 </div>
 
-                <!-- TAB 2: PROCESS MANAGER -->
+                <!-- TAB 2: TERMINAL (NEW) -->
+                <div id="view-terminal" class="view-section">
+                    <div class="card" style="height: 600px; display: flex; flex-direction: column; padding: 0; overflow: hidden;">
+                        <div class="terminal-output" id="term-output">
+                            <div style="color:#00f2c3">HYPER [Version 2.0.1]</div>
+                            <div style="color:#00f2c3">(c) Hyper Corp. All rights reserved.</div>
+                            <br>
+                            <div>Type 'help' for commands.</div>
+                        </div>
+                        <div class="terminal-input-area">
+                            <span>C:\Hyper\Admin&gt;</span>
+                            <input type="text" id="term-input" onkeydown="handleTermInput(event)" autocomplete="off" autofocus>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: NETWORK (NEW) -->
+                <div id="view-network" class="view-section">
+                    <div class="section-title">Network Interfaces (WMI)</div>
+                    <div class="tools-grid" id="network-container">
+                         <!-- Injected via JS -->
+                         <div style="width:100%; text-align:center; padding:20px;">Scanning Network Adapters...</div>
+                    </div>
+                    
+                    <div class="card stat-card" style="margin-top:20px;">
+                        <div class="stat-icon" style="background:#00f2c3; color:#000">🌍</div>
+                        <div class="stat-details">
+                            <h3>Quick Actions</h3>
+                            <div style="display:flex; gap:10px; margin-top:10px;">
+                                <button class="hyper-btn" onclick="runConsoleCmd('ipconfig /flushdns')">Flush DNS</button>
+                                <button class="hyper-btn" onclick="runConsoleCmd('ping google.com')">Ping Google</button>
+                                <button class="hyper-btn btn-danger" onclick="runConsoleCmd('ipconfig /release')">Release IP</button>
+                                <button class="hyper-btn btn-success" onclick="runConsoleCmd('ipconfig /renew')">Renew IP</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: PROCESS MANAGER -->
                 <div id="view-processes" class="view-section">
                     <div class="card table-card">
                         <div class="table-header">
@@ -211,7 +222,7 @@
                     </div>
                 </div>
 
-                <!-- TAB 3: HARDWARE SPECS -->
+                <!-- TAB 5: HARDWARE SPECS -->
                 <div id="view-specs" class="view-section">
                     <div class="section-title">Storage Drives</div>
                     <div class="tools-grid" id="disk-container">
@@ -229,15 +240,123 @@
                     </div>
                 </div>
 
+                <!-- TAB 6: POWER TOOLS -->
+                <div id="view-power" class="view-section">
+                    
+                    <!-- APP LIMITER (NEW FEATURE) -->
+                    <div class="section-title" style="color:#ff4b1f">🛡️ Anti-Addiction System (App Limiter)</div>
+                    <div class="card" style="padding:20px; margin-bottom:20px; border:1px solid #ff4b1f;">
+                        <div style="display:flex; gap:10px; margin-bottom:15px; align-items:center;">
+                            <!-- File Picker Group -->
+                            <div style="flex:2; display:flex; gap:5px;">
+                                <input type="text" id="limit-app-name" class="hyper-input" placeholder="App Name (e.g. chrome.exe)" readonly>
+                                <button class="hyper-btn" onclick="document.getElementById('file-picker').click()" title="Browse Executable">📂</button>
+                                <input type="file" id="file-picker" style="display:none" accept=".exe" onchange="handleFileSelect()">
+                            </div>
+
+                            <input type="number" id="limit-time" class="hyper-input" placeholder="Max Minutes/Day" style="flex:1">
+                            <input type="number" id="limit-count" class="hyper-input" placeholder="Max Launches/Day" style="flex:1">
+                            <button class="hyper-btn btn-danger" onclick="addLimitRule()">ADD RULE</button>
+                        </div>
+                        
+                        <div class="table-container" style="max-height: 250px;">
+                            <table class="hyper-table">
+                                <thead>
+                                    <tr>
+                                        <th width="25%">Target App</th>
+                                        <th width="35%">Usage Progress (Time)</th>
+                                        <th width="20%">Launches</th>
+                                        <th width="10%">Status</th>
+                                        <th width="10%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="limiter-table-body">
+                                    <tr><td colspan="5" style="text-align:center; color:#666">No rules active.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="font-size:11px; color:#aaa; margin-top:10px; font-style:italic;">
+                            * System scans every 5 seconds. Violations will be terminated immediately. Log is saved permanently.
+                        </div>
+                    </div>
+
+                    <div class="section-title">System32 Access (Admin Only)</div>
+                    
+                    <div class="stats-row">
+                        <!-- HOSTS EDITOR -->
+                        <div class="card stat-card" style="flex-direction:column; align-items:flex-start;">
+                            <div style="display:flex; width:100%; justify-content:space-between; margin-bottom:10px;">
+                                <h3>Network Blocking (Hosts File)</h3>
+                                <div class="tool-icon" style="width:30px; height:30px; font-size:16px; background:#e14eca;">🚫</div>
+                            </div>
+                            <div style="width:100%; display:flex; gap:10px;">
+                                <input type="text" id="txt-block-domain" class="hyper-input" placeholder="Enter domain (e.g. facebook.com)">
+                                <button class="hyper-btn btn-danger" onclick="blockDomain()">BLOCK</button>
+                            </div>
+                            <div style="font-size:11px; color:#aaa; margin-top:5px;">Directly writes to C:\Windows\System32\drivers\etc\hosts</div>
+                        </div>
+
+                        <!-- STARTUP MANAGER -->
+                        <div class="card stat-card" style="flex-direction:column; align-items:flex-start;">
+                            <div style="display:flex; width:100%; justify-content:space-between; margin-bottom:10px;">
+                                <h3>Startup Registry</h3>
+                                <div class="tool-icon" style="width:30px; height:30px; font-size:16px; background:#00f2c3; color:#000;">🚀</div>
+                            </div>
+                            <div class="log-card" style="width:100%; height:80px; background:rgba(0,0,0,0.2); margin-bottom:0;">
+                                <div id="startup-list" style="padding:10px; font-size:11px;">Loading Registry...</div>
+                            </div>
+                            <button class="hyper-btn" style="margin-top:10px; width:100%;" onclick="loadStartupApps()">Scan Registry Run Key</button>
+                        </div>
+                    </div>
+
+                    <!-- SERVICE MANAGER -->
+                    <div class="card table-card" style="height: 400px;">
+                        <div class="table-header">
+                            <h3>Windows Services Control (WMI)</h3>
+                            <button class="btn-refresh" onclick="loadServices()">🔄 Scan Services</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="hyper-table">
+                                <thead>
+                                    <tr>
+                                        <th>Service Name</th>
+                                        <th>Display Name</th>
+                                        <th>State</th>
+                                        <th width="100">Control</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="service-list-body">
+                                    <tr><td colspan="4" style="text-align:center; padding: 20px;">Waiting for scan...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </main>
     </div>
 
-    <!-- SCRIPTS -->
-    <script src="assets/js/main.js"></script>
+    <!-- CORE SCRIPTS (Order Matters) -->
+    <script src="assets/js/core.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/particles.js"></script>
+    
+    <!-- DATABASE -->
     <script src="modules/db/database.js"></script>
-    <script src="modules/system/hardware.js"></script>
-    <script src="modules/tools/commands.js"></script>
+    
+    <!-- SYSTEM MODULES -->
+    <script src="modules/system/monitor.js"></script>
+    <script src="modules/system/process_mgr.js"></script>
+    <script src="modules/system/specs.js"></script>
+    
+    <!-- TOOLS MODULES -->
+    <script src="modules/tools/utils.js"></script>
+    <script src="modules/tools/admin.js"></script>
+    <script src="modules/tools/powertools.js"></script>
+    <script src="modules/tools/console.js"></script>
+    <script src="modules/tools/app_limiter.js"></script>
 
 </body>
 </html>

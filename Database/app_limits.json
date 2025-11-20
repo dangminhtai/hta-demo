@@ -1,0 +1,11 @@
+﻿{
+    "lastResetDate": "‎11‎/‎20‎/‎2025",
+    "rules": {
+        "genshinimpact.exe": {
+            "maxTime": 5,
+            "maxLaunches": 3,
+            "usedSeconds": 315,
+            "launchCount": 4
+        }
+    }
+}

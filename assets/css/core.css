@@ -1,0 +1,33 @@
+
+/* 
+    PART 1: CORE BASE
+    Reset, Typography, Global Colors
+*/
+
+* { box-sizing: border-box; cursor: default; user-select: none; }
+
+body {
+    margin: 0; padding: 0;
+    background-color: #1e1e2f; /* Deep Dark Blue */
+    color: #ffffff;
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+    overflow: hidden;
+    height: 100%; width: 100%;
+    position: absolute;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #1e1e2f; }
+::-webkit-scrollbar-thumb { background: #3b3b53; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #e14eca; }
+
+/* Canvas Layer */
+#canvas-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+    
