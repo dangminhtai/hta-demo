@@ -6,14 +6,17 @@
 
 function switchTab(tabId) {
     // 1. Update Nav State
-    var navs = ["dashboard", "terminal", "network", "processes", "specs", "power"];
+    // New Order: Dashboard -> Specs -> Network -> System -> Limiter -> Terminal
+    var navs = ["dashboard", "specs", "network", "system", "limiter", "terminal"];
+    
+    // Map ID logic: nav-dash, nav-specs, nav-net, nav-system, nav-limiter, nav-term
     var nID_map = {
         "dashboard": "dash",
-        "terminal": "term",
-        "network": "net",
-        "processes": "proc",
         "specs": "specs",
-        "power": "power"
+        "network": "net",
+        "system": "system",
+        "limiter": "limiter",
+        "terminal": "term"
     };
 
     for(var i=0; i<navs.length; i++) {
@@ -36,23 +39,27 @@ function switchTab(tabId) {
     // 3. Update Title
     var titles = {
         "dashboard": "System Overview",
-        "terminal": "Command Center",
-        "network": "Network Toolkit",
-        "processes": "Task Manager Pro",
-        "specs": "Hardware Analysis",
-        "power": "Power Tools (Admin)"
+        "specs": "Hardware Core",
+        "network": "Network & Connectivity",
+        "system": "System Core Management",
+        "limiter": "Anti-Addiction Controller",
+        "terminal": "Command Center"
     };
     document.getElementById("page-title").innerText = titles[tabId] || "Hyper Admin";
 
     // 4. Trigger Lazy Load & Focus
-    if(tabId === "processes" && typeof loadProcessList === 'function') setTimeout(loadProcessList, 100);
     if(tabId === "specs" && typeof getDeepSpecs === 'function') setTimeout(getDeepSpecs, 100);
     if(tabId === "network" && typeof getNetworkInfo === 'function') setTimeout(getNetworkInfo, 100);
-    if(tabId === "power") {
+    
+    if(tabId === "system") {
         if(typeof loadStartupApps === 'function') setTimeout(loadStartupApps, 100);
         if(typeof loadServices === 'function') setTimeout(loadServices, 100);
+    }
+    
+    if(tabId === "limiter") {
         if(typeof refreshLimiterTable === 'function') setTimeout(refreshLimiterTable, 100);
     }
+
     if(tabId === "terminal") {
         setTimeout(function() {
             var input = document.getElementById("term-input");

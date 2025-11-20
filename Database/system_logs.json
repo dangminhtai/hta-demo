@@ -19,5 +19,26 @@
     "host": "TAMIDA142857",
     "action": "EXECUTE",
     "details": "Launched: Task Manager"
+  },
+  {
+    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎3‎:‎36‎:‎13‎ ‎PM",
+    "user": "minh tai",
+    "host": "TAMIDA142857",
+    "action": "EXECUTE",
+    "details": "Launched: Control Panel"
+  },
+  {
+    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎3‎:‎42‎:‎51‎ ‎PM",
+    "user": "minh tai",
+    "host": "TAMIDA142857",
+    "action": "ADMIN",
+    "details": "User accessed God Mode"
+  },
+  {
+    "timestamp": "‎11‎/‎20‎/‎2025‎ ‎3‎:‎42‎:‎55‎ ‎PM",
+    "user": "minh tai",
+    "host": "TAMIDA142857",
+    "action": "TWEAK",
+    "details": "Set Hidden Files to HIDDEN"
   }
 ]

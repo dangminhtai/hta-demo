@@ -3,9 +3,10 @@
     "rules": {
         "genshinimpact.exe": {
             "maxTime": 5,
-            "maxLaunches": 3,
-            "usedSeconds": 315,
-            "launchCount": 4
+            "maxLaunches": 2,
+            "usedSeconds": 0,
+            "launchCount": 0,
+            "hasWarned": false
         }
     }
 }

@@ -127,8 +127,9 @@ function monitorAppUsage() {
         // Lưu định kỳ
         saveLimitsData();
         
-        // Update UI nếu đang mở tab Power
-        if (document.getElementById("view-power").classList.contains("active")) {
+        // Update UI nếu đang mở tab Limiter (Đã đổi tên ID view)
+        var viewEl = document.getElementById("view-limiter");
+        if (viewEl && viewEl.className.indexOf("active") > -1) {
             refreshLimiterTable();
         }
 
@@ -197,8 +198,9 @@ function addLimitRule() {
     }
 
     // --- VALIDATION MỚI: TỐI THIỂU 2 PHÚT ---
+    // Để đảm bảo tính năng cảnh báo 1 phút hoạt động chính xác
     if (maxTime > 0 && maxTime < 2) {
-        alert("Định trêu ngươi à? Thời gian giới hạn tối thiểu phải là 2 phút (để còn có 1 phút cảnh báo chứ)!");
+        alert("Đã bảo là cho nó tối thiểu 2 phút cơ mà! Ít quá sao kịp cảnh báo?");
         return;
     }
     // ----------------------------------------
@@ -245,7 +247,7 @@ function refreshLimiterTable() {
     if (!tbody) return;
 
     if (!limitsData.rules || Object.keys(limitsData.rules).length === 0) {
-        tbody.innerHTML = "<tr><td colspan='5' style='text-align:center; color:#666'>No rules active.</td></tr>";
+        tbody.innerHTML = "<tr><td colspan='5' style='text-align:center; color:#666'>No active rules. Select an .exe to begin.</td></tr>";
         return;
     }
 
@@ -264,11 +266,11 @@ function refreshLimiterTable() {
         var finalStatus = (timeStatus !== "OK" || countStatus !== "OK") 
             ? "<span style='color:#ff4b1f; font-weight:bold'>BLOCKED</span>" 
             : "<span style='color:#00f2c3'>ACTIVE</span>";
-
-        // Color for progress bar
+        
+        // Logic màu thanh tiến trình: Xanh -> Vàng -> Đỏ
         var progColor = "#00f2c3";
         if(timePercent > 70) progColor = "#ff8d72";
-        if(timePercent >= 100) progColor = "#ff4b1f";
+        if(timePercent >= 90) progColor = "#ff4b1f";
 
         html += "<tr>";
         html += "<td style='color:#fff; font-weight:500'>" + app + "</td>";
